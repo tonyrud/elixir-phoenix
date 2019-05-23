@@ -14,8 +14,7 @@ config :discuss, Discuss.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "+/y0Qu1aSVNptIDrxTqshdWuwF9yKghS6zCQz2faIsHzv3Ghi649P+O9kHu62Vx9",
   render_errors: [view: Discuss.ErrorView, accepts: ~w(html json)],
-  pubsub: [name: Discuss.PubSub,
-           adapter: Phoenix.PubSub.PG2]
+  pubsub: [name: Discuss.PubSub, adapter: Phoenix.PubSub.PG2]
 
 # Configures Elixir's Logger
 config :logger, :console,
@@ -24,4 +23,14 @@ config :logger, :console,
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
-import_config "#{Mix.env}.exs"
+import_config "#{Mix.env()}.exs"
+
+config :ueberauth, Ueberauth,
+  providers: [
+    github: {Ueberauth.Strategy.Github, []}
+  ]
+
+config(:ueberauth, Ueberauth.Strategy.Github.OAuth,
+  client_id: "2fec09f492e6e3b89771",
+  client_secret: "886fd9d085aad061c9156988d8d31176997fd598"
+)
