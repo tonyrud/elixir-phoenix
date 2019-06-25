@@ -8,14 +8,14 @@ defmodule Discuss.CommentsChannel do
     topic =
       Topic
       |> Repo.get(topic_id)
-      |> Repo.preload(comments: [:user])
+      |> Repo.preload(:comments)
 
     {:ok, %{comments: topic.comments}, assign(socket, :topic, topic)}
   end
 
   def handle_in(name, %{"content" => content}, socket) do
     topic = socket.assigns.topic
-    user_id = socket.assigns.user_id
+    user_id = 1
 
     changeset =
       topic
